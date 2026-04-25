@@ -26,7 +26,7 @@ export default function HeroSection() {
           {/* Left: Copy & CTA */}
           <div className="max-w-xl space-y-6">
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: CUSTOM_EASE }}
             >
@@ -35,7 +35,7 @@ export default function HeroSection() {
 
             <motion.h1
               className="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem]"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: CUSTOM_EASE }}
             >
@@ -47,7 +47,7 @@ export default function HeroSection() {
 
             <motion.p
               className="text-lg leading-8 text-slate-600"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: CUSTOM_EASE }}
             >
@@ -56,7 +56,7 @@ export default function HeroSection() {
 
             <motion.div
               className="flex flex-col gap-3 sm:flex-row sm:items-center"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: CUSTOM_EASE }}
             >
@@ -87,7 +87,7 @@ export default function HeroSection() {
             {/* Trust badges */}
             <motion.div
               className="flex flex-wrap gap-3 pt-2"
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.45, ease: CUSTOM_EASE }}
             >
@@ -109,7 +109,7 @@ export default function HeroSection() {
           {/* Right: Hero image card */}
           <motion.div
             className="relative"
-            initial={{ opacity: 0, x: 24 }}
+            initial={{ opacity: 1, x: 0 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: CUSTOM_EASE }}
           >
