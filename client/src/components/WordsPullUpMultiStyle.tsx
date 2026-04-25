@@ -1,72 +1,68 @@
-/**
- * WordsPullUpMultiStyle — Prisma Creative Studio
- * Design: Brutalist Cinema
- * Takes an array of {text, className} segments.
- * Splits all into individual words, preserving per-word className.
+/*
+ * WordsPullUpMultiStyle — Takes an array of {text, className} segments,
+ * splits all into individual words preserving per-word className.
  * Same pull-up animation as WordsPullUp.
- * Words wrapped in inline-flex flex-wrap justify-center.
+ *
+ * Design: Analog Warmth / Darkroom Aesthetic
  */
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-export interface TextSegment {
+interface Segment {
   text: string;
   className?: string;
 }
 
 interface WordsPullUpMultiStyleProps {
-  segments: TextSegment[];
+  segments: Segment[];
   containerClassName?: string;
-  delay?: number;
+  staggerDelay?: number;
 }
-
-const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function WordsPullUpMultiStyle({
   segments,
   containerClassName = "",
-  delay = 0,
+  staggerDelay = 0.08,
 }: WordsPullUpMultiStyleProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
 
-  // Flatten all segments into individual word entries with their className
+  // Flatten all words with their associated className
   const allWords: { word: string; className: string }[] = [];
   for (const seg of segments) {
     const words = seg.text.trim().split(/\s+/);
     for (const word of words) {
-      if (word) {
-        allWords.push({ word, className: seg.className ?? "" });
-      }
+      allWords.push({ word, className: seg.className ?? "" });
     }
   }
 
   return (
-    <div
+    <span
       ref={ref}
       className={`inline-flex flex-wrap justify-center ${containerClassName}`}
     >
       {allWords.map((item, i) => (
         <span
           key={i}
-          className="overflow-hidden inline-block"
-          style={{ marginRight: "0.25em" }}
+          className="overflow-hidden inline-block mr-[0.25em] mb-[0.05em]"
         >
           <motion.span
             className={`inline-block ${item.className}`}
             initial={{ y: 20, opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+            animate={
+              isInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }
+            }
             transition={{
               duration: 0.8,
-              delay: delay + i * 0.08,
-              ease: EASE,
+              delay: i * staggerDelay,
+              ease: [0.16, 1, 0.3, 1],
             }}
           >
             {item.word}
           </motion.span>
         </span>
       ))}
-    </div>
+    </span>
   );
 }

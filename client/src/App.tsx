@@ -1,7 +1,7 @@
-/**
+/*
  * App — Prisma Creative Studio
- * Design: Brutalist Cinema
- * Dark theme, black background, warm cream text.
+ * Design: Analog Warmth / Darkroom Aesthetic
+ * Theme: dark (black background, cream text)
  */
 
 import { Toaster } from "@/components/ui/sonner";

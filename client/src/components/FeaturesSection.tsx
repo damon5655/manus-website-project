@@ -1,11 +1,12 @@
-/**
- * FeaturesSection — Prisma Creative Studio
- * Design: Brutalist Cinema
- * - min-h-screen bg-black with subtle bg-noise overlay
- * - WordsPullUpMultiStyle header
- * - 4-column card grid with staggered entrance animations
- * - Card 1: video background
- * - Cards 2-4: bg-[#212121] with icon, checklist, "Learn more" link
+/*
+ * FeaturesSection — 4-column card grid with staggered entrance animations
+ * Design: Analog Warmth / Darkroom Aesthetic
+ *
+ * Structure:
+ * - min-h-screen bg-black with .bg-noise overlay at opacity-[0.15]
+ * - Header: WordsPullUpMultiStyle (2 lines)
+ * - 4-column card grid: video card + 3 feature cards
+ * - Each card: scale 0.95 + fade in, staggered 0.15s, ease [0.22, 1, 0.36, 1]
  */
 
 import { motion, useInView } from "framer-motion";
@@ -13,9 +14,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { useRef } from "react";
 import WordsPullUpMultiStyle from "./WordsPullUpMultiStyle";
 
-const CARD_EASE = [0.22, 1, 0.36, 1] as const;
-
-const FEATURES_VIDEO =
+const FEATURES_VIDEO_URL =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4";
 
 const CARD_ICON_1 =
@@ -30,160 +29,85 @@ const HEADER_SEGMENTS = [
     text: "Studio-grade workflows for visionary creators.",
     className: "text-[#E1E0CC] font-normal",
   },
-];
-
-const HEADER_SEGMENTS_2 = [
   {
-    text: "Built for pure vision. Powered by art.",
+    text: " Built for pure vision. Powered by art.",
     className: "text-gray-500 font-normal",
   },
 ];
 
-interface ChecklistItem {
-  text: string;
-}
-
-interface FeatureCardData {
-  type: "video" | "info";
-  number?: string;
-  title?: string;
-  icon?: string;
-  items?: ChecklistItem[];
-}
-
-const CARDS: FeatureCardData[] = [
-  { type: "video" },
-  {
-    type: "info",
-    number: "01",
-    title: "Project Storyboard.",
-    icon: CARD_ICON_1,
-    items: [
-      { text: "Drag-and-drop scene sequencing" },
-      { text: "Multi-track timeline editing" },
-      { text: "Real-time collaboration tools" },
-      { text: "Export to any format" },
-    ],
-  },
-  {
-    type: "info",
-    number: "02",
-    title: "Smart Critiques.",
-    icon: CARD_ICON_2,
-    items: [
-      { text: "AI-powered creative analysis" },
-      { text: "Detailed creative notes & feedback" },
-      { text: "Seamless tool integrations" },
-    ],
-  },
-  {
-    type: "info",
-    number: "03",
-    title: "Immersion Capsule.",
-    icon: CARD_ICON_3,
-    items: [
-      { text: "Intelligent notification silencing" },
-      { text: "Curated ambient soundscapes" },
-      { text: "Schedule syncing & focus blocks" },
-    ],
-  },
-];
-
-function VideoCard({ index }: { index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      className="relative rounded-2xl overflow-hidden lg:h-[480px] min-h-[300px] flex items-end"
-      initial={{ scale: 0.95, opacity: 0 }}
-      animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.95, opacity: 0 }}
-      transition={{ duration: 0.7, delay: index * 0.15, ease: CARD_EASE }}
-    >
-      <video
-        src={FEATURES_VIDEO}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-      <p
-        className="relative z-10 p-5 text-base md:text-lg font-medium"
-        style={{ color: "#E1E0CC" }}
-      >
-        Your creative canvas.
-      </p>
-    </motion.div>
-  );
-}
-
-function InfoCard({
-  card,
-  index,
-}: {
-  card: FeatureCardData;
+interface FeatureCardProps {
+  number: string;
+  title: string;
+  icon: string;
+  items: string[];
   index: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  isInView: boolean;
+}
 
+function FeatureCard({
+  number,
+  title,
+  icon,
+  items,
+  index,
+  isInView,
+}: FeatureCardProps) {
   return (
     <motion.div
-      ref={ref}
-      className="bg-[#212121] rounded-2xl p-5 md:p-6 lg:h-[480px] flex flex-col justify-between"
+      className="bg-[#212121] rounded-2xl p-5 md:p-6 flex flex-col h-full min-h-[320px] lg:h-[480px]"
       initial={{ scale: 0.95, opacity: 0 }}
-      animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.95, opacity: 0 }}
-      transition={{ duration: 0.7, delay: index * 0.15, ease: CARD_EASE }}
+      animate={
+        isInView ? { scale: 1, opacity: 1 } : { scale: 0.95, opacity: 0 }
+      }
+      transition={{
+        duration: 0.6,
+        delay: index * 0.15,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
-      {/* Top: icon + number + title */}
-      <div>
-        {card.icon && (
-          <img
-            src={card.icon}
-            alt={card.title}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover mb-4"
-          />
-        )}
-        <div className="flex items-start justify-between mb-4">
-          <h3
-            className="text-base md:text-lg font-medium"
-            style={{ color: "#E1E0CC" }}
-          >
-            {card.title}
-          </h3>
-          <span className="text-xs text-gray-500 font-mono ml-2 mt-0.5">
-            {card.number}
-          </span>
-        </div>
-
-        {/* Checklist */}
-        <ul className="space-y-2">
-          {card.items?.map((item, i) => (
-            <li key={i} className="flex items-start gap-2">
-              <Check
-                className="w-3.5 h-3.5 mt-0.5 flex-shrink-0"
-                style={{ color: "#DEDBC8" }}
-              />
-              <span className="text-xs text-gray-400 leading-relaxed">
-                {item.text}
-              </span>
-            </li>
-          ))}
-        </ul>
+      {/* Icon */}
+      <div className="mb-4">
+        <img
+          src={icon}
+          alt={title}
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover"
+        />
       </div>
 
-      {/* Bottom: Learn more */}
-      <div className="mt-4">
+      {/* Number + Title */}
+      <div className="mb-4">
+        <span className="text-[10px] text-gray-500 font-medium tracking-widest">
+          {number}
+        </span>
+        <h3 className="text-[#E1E0CC] font-medium text-base sm:text-lg mt-1">
+          {title}
+        </h3>
+      </div>
+
+      {/* Checklist */}
+      <ul className="flex flex-col gap-2 flex-1">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <Check
+              className="w-3.5 h-3.5 mt-0.5 flex-shrink-0"
+              style={{ color: "#DEDBC8" }}
+            />
+            <span className="text-gray-400 text-xs sm:text-sm leading-snug">
+              {item}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Learn more link */}
+      <div className="mt-4 pt-4 border-t border-white/10">
         <a
           href="#"
-          className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#DEDBC8] transition-colors duration-200 group"
+          className="inline-flex items-center gap-1.5 text-[#DEDBC8] text-xs sm:text-sm hover:gap-2.5 transition-all duration-200"
         >
           <span>Learn more</span>
           <ArrowRight
-            className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-200"
+            className="w-3.5 h-3.5"
             style={{ transform: "rotate(-45deg)" }}
           />
         </a>
@@ -193,41 +117,105 @@ function InfoCard({
 }
 
 export default function FeaturesSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
     <section className="min-h-screen bg-black py-16 md:py-24 px-4 md:px-6 relative overflow-hidden">
-      {/* Subtle noise background */}
+      {/* Noise background */}
       <div
-        className="bg-noise absolute inset-0 pointer-events-none"
-        style={{ opacity: 0.15 }}
+        className="bg-noise absolute inset-0 pointer-events-none opacity-[0.15]"
+        aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-10 md:mb-14 text-center">
-          <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-2">
+        <div className="text-center mb-10 md:mb-14">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal leading-snug max-w-3xl mx-auto">
             <WordsPullUpMultiStyle
               segments={HEADER_SEGMENTS}
-              containerClassName="justify-center"
+              containerClassName="text-center"
             />
-          </div>
-          <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal">
-            <WordsPullUpMultiStyle
-              segments={HEADER_SEGMENTS_2}
-              containerClassName="justify-center"
-              delay={0.3}
-            />
-          </div>
+          </h2>
         </div>
 
-        {/* 4-column card grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2 md:gap-1">
-          {CARDS.map((card, i) =>
-            card.type === "video" ? (
-              <VideoCard key={i} index={i} />
-            ) : (
-              <InfoCard key={i} card={card} index={i} />
-            )
-          )}
+        {/* Card grid */}
+        <div
+          ref={ref}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-2 md:gap-1"
+        >
+          {/* Card 1 — Video card */}
+          <motion.div
+            className="relative rounded-2xl overflow-hidden min-h-[320px] lg:h-[480px]"
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={
+              isInView ? { scale: 1, opacity: 1 } : { scale: 0.95, opacity: 0 }
+            }
+            transition={{
+              duration: 0.6,
+              delay: 0,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <video
+              src={FEATURES_VIDEO_URL}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Gradient overlay for text legibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 right-5">
+              <p className="text-sm sm:text-base font-medium" style={{ color: "#E1E0CC" }}>
+                Your creative canvas.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Card 2 — Project Storyboard */}
+          <FeatureCard
+            number="01"
+            title="Project Storyboard."
+            icon={CARD_ICON_1}
+            items={[
+              "Organize scenes, shots, and sequences visually",
+              "Drag-and-drop timeline for effortless planning",
+              "Collaborate with your team in real time",
+              "Export storyboards as PDF or image sets",
+            ]}
+            index={1}
+            isInView={isInView}
+          />
+
+          {/* Card 3 — Smart Critiques */}
+          <FeatureCard
+            number="02"
+            title="Smart Critiques."
+            icon={CARD_ICON_2}
+            items={[
+              "AI-powered analysis of your creative work",
+              "Detailed creative notes from industry mentors",
+              "Seamless integrations with your favorite tools",
+            ]}
+            index={2}
+            isInView={isInView}
+          />
+
+          {/* Card 4 — Immersion Capsule */}
+          <FeatureCard
+            number="03"
+            title="Immersion Capsule."
+            icon={CARD_ICON_3}
+            items={[
+              "Silence notifications for deep focus sessions",
+              "Curated ambient soundscapes for creative flow",
+              "Sync your creative schedule automatically",
+            ]}
+            index={3}
+            isInView={isInView}
+          />
         </div>
       </div>
     </section>
