@@ -136,13 +136,15 @@ function CTABannerSection() {
 
 export default function Home() {
   return (
-    <SiteLayout>
+    <>
       <HeroSection />
-      <AboutSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <ProcessSection />
-      <CTABannerSection />
-    </SiteLayout>
+      <SiteLayout>
+        <AboutSection />
+        <FeaturesSection />
+        <TestimonialsSection />
+        <ProcessSection />
+        <CTABannerSection />
+      </SiteLayout>
+    </>
   );
 }
