@@ -1,13 +1,19 @@
-/*
- * Design Philosophy: Clean & Trustworthy Local Service
- * Brand: AG Best Cleaning Services
- * Primary: #79abdc (sky blue), #5dab3b (fresh green)
- */
+/* ============================================================
+   AG Best Cleaning Services — Design System
+   Philosophy: Dark Precision / Liquid Glass
+   - Near-black (#0a0c0f) base, white text, glass-surface depth
+   - Inter font, tight letter-spacing (-0.04em) on display text
+   - Liquid glass cards: rgba dark + backdrop-blur
+   - Numbered service rows, staggered character animations
+   - Conversion-first hierarchy
+   ============================================================ */
+
 @import "tailwindcss";
 @import "tw-animate-css";
+
 @custom-variant dark (&:is(.dark *));
+
 @theme inline {
-  --font-sans: 'Inter', sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -31,102 +37,87 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-ag-blue: #79abdc;
-  --color-ag-green: #5dab3b;
+  --font-sans: 'Inter', sans-serif;
 }
+
 :root {
-  --radius: 0.65rem;
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.62 0.1 230);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0.005 230);
-  --secondary-foreground: oklch(0.2 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.94 0.02 140);
-  --accent-foreground: oklch(0.2 0 0);
+  --radius: 0.75rem;
+  --background: oklch(0.08 0.005 250);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.12 0.005 250);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.12 0.005 250);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.97 0 0);
+  --primary-foreground: oklch(0.08 0.005 250);
+  --secondary: oklch(0.18 0.005 250);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.18 0.005 250);
+  --muted-foreground: oklch(0.65 0.005 250);
+  --accent: oklch(0.18 0.005 250);
+  --accent-foreground: oklch(0.97 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.9 0 0);
-  --ring: oklch(0.62 0.1 230);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.97 0 0);
 }
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground;
-    background-color: #ffffff;
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #0a0c0f;
+    color: #ffffff;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
+  a[href] {
     @apply cursor-pointer;
   }
 }
+
 @layer components {
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
+
   .flex {
     min-height: 0;
     min-width: 0;
   }
-  @media (min-width: 640px) {
+
+  @media (min-width: 768px) {
     .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      padding-left: 3rem;
+      padding-right: 3rem;
     }
-  }
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      max-width: 1280px;
-    }
-  }
-  .eyebrow {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #5dab3b;
-  }
-  .section-shell {
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-  }
-  .nav-link {
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.15s;
-  }
-  .nav-link:hover {
-    color: #79abdc;
   }
 
-  /* Liquid Glass */
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 4rem;
+      padding-right: 4rem;
+      max-width: 1440px;
+    }
+  }
+
+  /* ============================================================
+     LIQUID GLASS COMPONENT
+     ============================================================ */
   .liquid-glass {
     background: rgba(0, 0, 0, 0.4);
     background-blend-mode: luminosity;
@@ -137,6 +128,7 @@
     position: relative;
     overflow: hidden;
   }
+
   .liquid-glass::before {
     content: '';
     position: absolute;
@@ -145,13 +137,182 @@
     padding: 1.4px;
     background: linear-gradient(
       180deg,
-      rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 20%,
-      rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
-      rgba(255,255,255,0.1) 80%, rgba(255,255,255,0.3) 100%
+      rgba(255,255,255,0.3) 0%,
+      rgba(255,255,255,0.1) 20%,
+      rgba(255,255,255,0) 40%,
+      rgba(255,255,255,0) 60%,
+      rgba(255,255,255,0.1) 80%,
+      rgba(255,255,255,0.3) 100%
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
+  }
+
+  /* ============================================================
+     BUTTON SYSTEM (from Section 1 — single source of truth)
+     ============================================================ */
+  .btn-primary {
+    background: #ffffff;
+    color: #000000;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: background 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background: #e5e5e5;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn-secondary:hover {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* ============================================================
+     SECTION SPACING
+     ============================================================ */
+  .section-pad {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .section-pad {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+  }
+
+  /* ============================================================
+     TYPOGRAPHY SYSTEM
+     ============================================================ */
+  .display-heading {
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: #ffffff;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ============================================================
+     FORM ELEMENTS
+     ============================================================ */
+  .form-input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s ease;
+    outline: none;
+  }
+  .form-input::placeholder {
+    color: rgba(255,255,255,0.35);
+  }
+  .form-input:focus {
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  /* ============================================================
+     SERVICE ROW (numbered list style)
+     ============================================================ */
+  .service-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s ease;
+  }
+  .service-row:first-child {
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .service-number {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.05em;
+    min-width: 2rem;
+    padding-top: 0.15rem;
+  }
+
+  /* ============================================================
+     REVIEW CARD
+     ============================================================ */
+  .review-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  /* ============================================================
+     MOBILE STICKY CTA
+     ============================================================ */
+  .mobile-cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    background: rgba(10, 12, 15, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-cta-bar {
+      display: none;
+    }
+  }
+
+  /* ============================================================
+     STAR RATING
+     ============================================================ */
+  .stars {
+    display: flex;
+    gap: 0.15rem;
+    color: #f59e0b;
   }
 }

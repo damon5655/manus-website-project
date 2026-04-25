@@ -1,188 +1,280 @@
-import SiteLayout from "@/components/SiteLayout";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { brand, contactDetails, services } from "@/lib/siteData";
-import { ArrowRight, CheckCircle2, Clock } from "lucide-react";
-import { motion } from "framer-motion";
+/* ============================================================
+   Contact Page — AG Best Cleaning Services
+   Design System: Dark Precision / Liquid Glass
+   ============================================================ */
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import MobileCTA from "@/components/MobileCTA";
 
-const quoteBenefits = [
-  "Free estimate — no commitment, no pressure",
-  "We respond within 24 hours for all inquiries",
-  "Flexible scheduling around your home or business hours",
-  "Customized cleaning plan built for your specific space",
-];
+function ContactForm() {
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    serviceType: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  if (submitted) {
+    return (
+      <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
+        <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>✓</div>
+        <div style={{ fontSize: "1.25rem", fontWeight: 500, marginBottom: "0.5rem" }}>
+          Message received
+        </div>
+        <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.9375rem" }}>
+          We'll be in touch within one business day.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div style={{ display: "grid", gap: "1rem" }} className="form-grid-2">
+        <div>
+          <label style={{ display: "block", fontSize: "0.8125rem", color: "rgba(255,255,255,0.55)", marginBottom: "0.4rem" }}>
+            Name
+          </label>
+          <input
+            className="form-input"
+            type="text"
+            placeholder="Your name"
+            required
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          />
+        </div>
+        <div>
+          <label style={{ display: "block", fontSize: "0.8125rem", color: "rgba(255,255,255,0.55)", marginBottom: "0.4rem" }}>
+            Email
+          </label>
+          <input
+            className="form-input"
+            type="email"
+            placeholder="your@email.com"
+            required
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          />
+        </div>
+      </div>
+      <div style={{ display: "grid", gap: "1rem" }} className="form-grid-2">
+        <div>
+          <label style={{ display: "block", fontSize: "0.8125rem", color: "rgba(255,255,255,0.55)", marginBottom: "0.4rem" }}>
+            Phone
+          </label>
+          <input
+            className="form-input"
+            type="tel"
+            placeholder="(xxx) xxx-xxxx"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+          />
+        </div>
+        <div>
+          <label style={{ display: "block", fontSize: "0.8125rem", color: "rgba(255,255,255,0.55)", marginBottom: "0.4rem" }}>
+            Service Type
+          </label>
+          <select
+            className="form-input"
+            value={formData.serviceType}
+            onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
+            style={{ cursor: "pointer" }}
+          >
+            <option value="" style={{ background: "#0a0c0f" }}>Select a service</option>
+            <option value="residential" style={{ background: "#0a0c0f" }}>Residential Cleaning</option>
+            <option value="commercial" style={{ background: "#0a0c0f" }}>Commercial Cleaning</option>
+            <option value="moveinout" style={{ background: "#0a0c0f" }}>Move In / Move Out</option>
+            <option value="postconstruction" style={{ background: "#0a0c0f" }}>Post-Construction</option>
+            <option value="deepclean" style={{ background: "#0a0c0f" }}>First-Time Deep Clean</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label style={{ display: "block", fontSize: "0.8125rem", color: "rgba(255,255,255,0.55)", marginBottom: "0.4rem" }}>
+          Message
+        </label>
+        <textarea
+          className="form-input"
+          placeholder="Tell us about your space and what you need..."
+          rows={4}
+          value={formData.message}
+          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          style={{ resize: "vertical" }}
+        />
+      </div>
+      <button type="submit" className="btn-primary" style={{ marginTop: "0.5rem", justifyContent: "center" }}>
+        Send Message
+      </button>
+    </form>
+  );
+}
 
 export default function Contact() {
   return (
-    <SiteLayout>
-      <section className="bg-gradient-to-br from-slate-50 to-white pb-16 pt-12 sm:pb-20 sm:pt-16">
-        <div className="container grid gap-10 lg:grid-cols-[0.92fr,1.08fr] lg:items-start">
-          {/* Left: info */}
-          <motion.div
-            className="space-y-6"
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+    <div style={{ background: "#0a0c0f", minHeight: "100vh", color: "#ffffff" }}>
+      <Navbar />
+
+      {/* Page header */}
+      <section
+        style={{
+          paddingTop: "9rem",
+          paddingBottom: "4rem",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        <div className="container">
+          <div className="section-label" style={{ marginBottom: "0.75rem" }}>
+            Contact
+          </div>
+          <h1
+            className="display-heading"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", maxWidth: "36rem" }}
           >
-            <span className="eyebrow">Get a free estimate</span>
-            <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-              Tell us about your space and we'll build a{" "}
-              <span style={{ color: "#79abdc" }}>cleaning plan around you</span>
-            </h1>
-            <p className="text-lg leading-8 text-slate-600">
-              Whether you need a one-time deep clean or a recurring service for your home or business, we make it easy to get started. Fill out the form or reach us directly — we're happy to help.
-            </p>
-
-            {/* Contact detail cards */}
-            <div className="grid gap-3">
-              {contactDetails.map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <a
-                    key={item.title}
-                    href={item.href}
-                    className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#79abdc]"
-                  >
-                    <div
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white shadow-md"
-                      style={{ backgroundColor: i % 2 === 0 ? "#79abdc" : "#5dab3b" }}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-semibold uppercase tracking-widest text-slate-500">{item.title}</div>
-                      <div className="mt-1 text-base font-semibold text-slate-900">{item.value}</div>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
-
-            {/* Hours */}
-            <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <Clock className="h-5 w-5 shrink-0" style={{ color: "#5dab3b" }} />
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">Hours</p>
-                <p className="mt-0.5 text-sm font-semibold text-slate-900">Monday – Saturday, 8am – 6pm</p>
-              </div>
-            </div>
-
-            {/* Why request */}
-            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
-              <h2 className="font-bold text-slate-900">Why request a free estimate?</h2>
-              <div className="mt-4 grid gap-2.5">
-                {quoteBenefits.map((item) => (
-                  <div key={item} className="flex gap-3 text-sm text-slate-700">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "#5dab3b" }} />
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right: form */}
-          <motion.div
-            className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-lg sm:p-8"
-            initial={{ opacity: 0, x: 16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <h2 className="text-2xl font-extrabold text-slate-900">Request your free estimate</h2>
-            <p className="mt-2 text-sm text-slate-500">We'll get back to you within 24 hours.</p>
-
-            <form className="mt-6 space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-                    Full name
-                  </label>
-                  <Input
-                    placeholder="Your name"
-                    className="rounded-xl border-slate-200 bg-slate-50 focus:border-[#79abdc] focus:ring-[#79abdc]/20"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-                    Phone number
-                  </label>
-                  <Input
-                    type="tel"
-                    placeholder="(xxx) xxx-xxxx"
-                    className="rounded-xl border-slate-200 bg-slate-50 focus:border-[#79abdc]"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-                  Email address
-                </label>
-                <Input
-                  type="email"
-                  placeholder="you@example.com"
-                  className="rounded-xl border-slate-200 bg-slate-50 focus:border-[#79abdc]"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-                  Service needed
-                </label>
-                <select className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-700 focus:border-[#79abdc] focus:outline-none focus:ring-2 focus:ring-[#79abdc]/20">
-                  <option value="">Select a service...</option>
-                  {services.map((service) => (
-                    <option key={service.slug} value={service.slug}>
-                      {service.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold uppercase tracking-widest text-slate-500">
-                  Message / details
-                </label>
-                <Textarea
-                  placeholder="Tell us about your space, preferred schedule, or any special requests..."
-                  rows={4}
-                  className="rounded-xl border-slate-200 bg-slate-50 focus:border-[#79abdc]"
-                />
-              </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full rounded-xl text-white shadow-md"
-                style={{ backgroundColor: "#5dab3b" }}
-              >
-                Get my free estimate
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-
-              <p className="text-center text-xs text-slate-400">
-                No commitment required. We'll reach out to confirm details.
-              </p>
-            </form>
-
-            {/* Service area chips */}
-            <div className="mt-6 border-t border-slate-100 pt-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">Services we offer</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {services.map((service) => (
-                  <span
-                    key={service.slug}
-                    className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600"
-                  >
-                    {service.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+            Get in touch.
+          </h1>
         </div>
       </section>
-    </SiteLayout>
+
+      {/* Contact layout */}
+      <section className="section-pad">
+        <div className="container">
+          <div className="contact-layout">
+            {/* Left: contact info */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+              <div>
+                <div className="section-label" style={{ marginBottom: "0.75rem" }}>
+                  Reach us directly
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                  <a
+                    href="tel:+17818240404"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      textDecoration: "none",
+                      color: "#ffffff",
+                      padding: "1rem",
+                      background: "rgba(255,255,255,0.04)",
+                      borderRadius: "0.5rem",
+                      border: "1px solid rgba(255,255,255,0.07)",
+                      transition: "background 0.2s ease",
+                    }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ color: "rgba(255,255,255,0.5)", flexShrink: 0 }}>
+                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <div>
+                      <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.15rem" }}>Phone</div>
+                      <div style={{ fontSize: "1rem", fontWeight: 500 }}>(781) 824-0404</div>
+                    </div>
+                  </a>
+
+                  <a
+                    href="mailto:contact@agbestcleaning.com"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      textDecoration: "none",
+                      color: "#ffffff",
+                      padding: "1rem",
+                      background: "rgba(255,255,255,0.04)",
+                      borderRadius: "0.5rem",
+                      border: "1px solid rgba(255,255,255,0.07)",
+                    }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ color: "rgba(255,255,255,0.5)", flexShrink: 0 }}>
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <div>
+                      <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.15rem" }}>Email</div>
+                      <div style={{ fontSize: "0.9375rem" }}>contact@agbestcleaning.com</div>
+                    </div>
+                  </a>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      padding: "1rem",
+                      background: "rgba(255,255,255,0.04)",
+                      borderRadius: "0.5rem",
+                      border: "1px solid rgba(255,255,255,0.07)",
+                    }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ color: "rgba(255,255,255,0.5)", flexShrink: 0 }}>
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <div>
+                      <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.15rem" }}>Address</div>
+                      <div style={{ fontSize: "0.9375rem" }}>729 Old Randolph St, Abington, MA 02351</div>
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
+                      padding: "1rem",
+                      background: "rgba(255,255,255,0.04)",
+                      borderRadius: "0.5rem",
+                      border: "1px solid rgba(255,255,255,0.07)",
+                    }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ color: "rgba(255,255,255,0.5)", flexShrink: 0 }}>
+                      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+                    </svg>
+                    <div>
+                      <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.15rem" }}>Hours</div>
+                      <div style={{ fontSize: "0.9375rem" }}>Mon–Sat, 8am–6pm</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: form */}
+            <div
+              className="liquid-glass"
+              style={{
+                borderRadius: "1rem",
+                padding: "2rem",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <h2 style={{ fontSize: "1.25rem", fontWeight: 400, marginBottom: "1.5rem", letterSpacing: "-0.02em" }}>
+                Send us a message
+              </h2>
+              <ContactForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <MobileCTA />
+
+      <style>{`
+        @media (min-width: 1024px) {
+          .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
+        }
+        .contact-layout { display: flex; flex-direction: column; gap: 2.5rem; }
+        @media (min-width: 768px) {
+          .form-grid-2 { grid-template-columns: 1fr 1fr !important; }
+        }
+      `}</style>
+    </div>
   );
 }
