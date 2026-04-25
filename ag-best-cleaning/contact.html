@@ -1,188 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | AG Best Cleaning Services — Abington, MA</title>
-  <meta name="description" content="Contact AG Best Cleaning Services for a free quote. Call (781) 824-0404 or email contact@agbestcleaning.com. Serving Abington and Greater Boston.">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — AG Best Cleaning Services</title>
+  <meta name="description" content="Request a free quote from AG Best Cleaning Services. Call (781) 824-0404 or email contact@agbestcleaning.com. Serving Abington and Greater Boston." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Sticky CTA Bar -->
-  <div class="sticky-bar">
-    <span class="sticky-phone">
-      Questions? Call us: <a href="tel:7818240404">(781) 824-0404</a>
-    </span>
-    <a href="#quote-form" class="sticky-cta">Get a Free Quote</a>
+  <!-- ===== STICKY TOP BAR ===== -->
+  <div class="top-bar">
+    <div class="container">
+      <a href="tel:7818240404">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (781) 824-0404
+      </a>
+      <span style="color:rgba(255,255,255,0.4)">Mon–Sat, 8am–6pm &nbsp;·&nbsp; Abington, MA</span>
+      <a href="#quote" class="cta-bar">Get a Free Quote</a>
+    </div>
   </div>
 
-  <!-- Navigation -->
-  <header class="site-header">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <span class="logo-mark">AG</span>
-        AG Best Cleaning
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-logo">
+        <div class="logo-mark">AG</div>
+        <span>AG Best Cleaning</span>
       </a>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="contact.html" class="active">Contact</a>
-      </nav>
-      <span class="nav-phone"><a href="tel:7818240404">(781) 824-0404</a></span>
-      <a href="#quote-form" class="nav-cta">Get a Free Quote</a>
-      <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
+      <ul class="navbar-nav" id="main-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <a href="tel:7818240404" class="navbar-phone">(781) 824-0404</a>
+        <a href="#quote" class="btn btn-primary">Get a Free Quote</a>
+      </div>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
-      <a href="tel:7818240404">(781) 824-0404</a>
-      <a href="#quote-form" class="mobile-cta">Get a Free Quote</a>
-    </div>
-  </header>
+  </nav>
 
-  <!-- Page Hero -->
-  <section class="page-hero">
+  <!-- ===== PAGE HERO ===== -->
+  <div class="page-hero">
     <div class="container">
-      <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; Contact</div>
       <h1>Contact Us</h1>
-      <p>Reach out by phone, email, or the form below. We respond within one business day.</p>
+      <p>Request a free quote or ask a question — we respond within one business day</p>
     </div>
-  </section>
+  </div>
 
-  <!-- Contact Section -->
-  <section class="section" style="background:var(--light-bg);" id="quote-form">
+  <!-- ===== CONTACT FORM ===== -->
+  <section class="contact-section" id="quote">
     <div class="container">
       <div class="contact-grid">
-
-        <!-- Contact Info -->
         <div class="contact-info">
-          <h3>Get in touch</h3>
+          <p class="section-label">Get in touch</p>
+          <h2>Request a free quote</h2>
+          <p>Fill out the form and we will follow up within one business day. No commitment required. You can also call or email us directly.</p>
 
-          <div class="contact-item">
-            <div class="contact-item-icon">&#128222;</div>
-            <div class="contact-item-text">
-              <h4>Phone</h4>
-              <p><a href="tel:7818240404">(781) 824-0404</a></p>
-              <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">Call anytime during business hours</p>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Phone</strong>
+              <a href="tel:7818240404">(781) 824-0404</a>
             </div>
           </div>
 
-          <div class="contact-item">
-            <div class="contact-item-icon">&#9993;</div>
-            <div class="contact-item-text">
-              <h4>Email</h4>
-              <p><a href="mailto:contact@agbestcleaning.com">contact@agbestcleaning.com</a></p>
-              <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">We respond within one business day</p>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Email</strong>
+              <a href="mailto:contact@agbestcleaning.com">contact@agbestcleaning.com</a>
             </div>
           </div>
 
-          <div class="contact-item">
-            <div class="contact-item-icon">&#128205;</div>
-            <div class="contact-item-text">
-              <h4>Service Area</h4>
-              <p>Abington, MA and Greater Boston</p>
-              <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">40+ cities covered across the South Shore</p>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-detail-text">
+              <strong>Service Area</strong>
+              <span>Abington and Greater Boston, MA</span>
             </div>
           </div>
 
-          <div class="contact-item">
-            <div class="contact-item-icon">&#128336;</div>
-            <div class="contact-item-text">
-              <h4>Hours</h4>
-              <p>Monday – Saturday, 8am – 6pm</p>
-              <p style="font-size:12px; color:var(--text-muted); margin-top:3px;">Closed Sundays</p>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
-          </div>
-
-          <div style="margin-top:28px; padding:20px; background:#fff; border:1px solid var(--border); border-radius:8px;">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-              <span style="color:#f5a623; font-size:16px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-              <span style="font-size:14px; font-weight:600; color:var(--navy);">5.0 on Google</span>
+            <div class="contact-detail-text">
+              <strong>Hours</strong>
+              <span>Monday – Saturday, 8am – 6pm</span>
             </div>
-            <p style="font-size:13px; color:var(--text-muted); line-height:1.55;">33 verified reviews from clients across Greater Boston. <a href="https://www.google.com/maps/place/AG+Best+Cleaning+Services" target="_blank" rel="noopener" style="color:var(--blue-deeper);">Read reviews on Google</a></p>
           </div>
         </div>
 
-        <!-- Quote Form -->
-        <div class="form-wrapper" style="margin:0;">
-          <h2 class="form-title">Request a Free Quote</h2>
-          <p class="form-note">Fill out the form below and we'll get back to you within one business day. No commitment required.</p>
-          <form onsubmit="handleSubmit(event)">
+        <div class="quote-form">
+          <h3>Get a Free Quote</h3>
+          <form action="#" method="post">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your full name" required>
+              <input type="text" id="name" name="name" placeholder="Your full name" required />
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required />
             </div>
             <div class="form-group">
               <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" placeholder="(781) 000-0000">
+              <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" />
             </div>
             <div class="form-group">
               <label for="area">Service Area</label>
-              <input type="text" id="area" name="area" placeholder="City or zip code (e.g. Abington, MA)" required>
+              <input type="text" id="area" name="area" placeholder="City or zip code" />
             </div>
-            <button type="submit" class="form-submit">Request a Free Quote</button>
+            <button type="submit" class="btn btn-primary form-submit">Request a Free Quote</button>
           </form>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-top">
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">AG Best Cleaning Services</div>
-          <p>Residential and commercial cleaning in Abington and Greater Boston. Serving 40+ cities for over 6 years.</p>
+          <div class="logo-mark">AG</div>
+          <p>AG Best Cleaning Services provides deep cleaning and commercial cleaning in Abington and the Greater Boston area. Over 6 years of reliable service.</p>
         </div>
-        <div class="footer-col">
+        <div>
           <h4>Pages</h4>
-          <ul>
+          <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
-        <div class="footer-col">
+        <div>
           <h4>Contact</h4>
-          <div class="footer-phone"><a href="tel:7818240404" style="color:var(--blue);">(781) 824-0404</a></div>
-          <div class="footer-email"><a href="mailto:contact@agbestcleaning.com" style="color:rgba(255,255,255,0.65);">contact@agbestcleaning.com</a></div>
-          <p style="font-size:13px; margin-top:8px; color:rgba(255,255,255,0.55);">Abington, MA &nbsp;·&nbsp; Mon–Sat 8am–6pm</p>
-          <a href="#quote-form" class="footer-cta">Get a Free Quote</a>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:7818240404">(781) 824-0404</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:contact@agbestcleaning.com">contact@agbestcleaning.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Abington, MA</span>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2025 AG Best Cleaning Services. All rights reserved.</span>
-        <span>Serving Abington and Greater Boston, MA</span>
+        <p>&copy; 2025 AG Best Cleaning Services. All rights reserved.</p>
+        <div class="footer-cta">
+          <a href="#quote" class="btn btn-primary">Get a Free Quote</a>
+        </div>
       </div>
     </div>
   </footer>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('open');
-    }
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = 'Request Sent — We\'ll be in touch soon.';
-      btn.style.background = 'var(--blue-deeper)';
-      btn.disabled = true;
-    }
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('main-nav');
+    if (toggle && nav) toggle.addEventListener('click', () => nav.classList.toggle('open'));
   </script>
-
 </body>
 </html>
