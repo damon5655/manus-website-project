@@ -1,61 +1,83 @@
-/*
- * AboutSection — Dark card with multi-style heading and scroll-linked text
- * Design: Analog Warmth / Darkroom Aesthetic
- *
- * Structure:
- * - bg-black outer, centered content
- * - Inner card: bg-[#101010], max-w-6xl
- * - Small "Visual arts" label
- * - WordsPullUpMultiStyle heading (3 segments: normal, serif italic, normal)
- * - AnimatedText body with scroll-linked character opacity
- */
-
-import AnimatedText from "./AnimatedText";
-import WordsPullUpMultiStyle from "./WordsPullUpMultiStyle";
-
-const ABOUT_SEGMENTS = [
-  { text: "I am Marcus Chen,", className: "font-normal text-[#E1E0CC]" },
-  {
-    text: "a self-taught director.",
-    className: "font-serif text-[#E1E0CC]",
-  },
-  {
-    text: "I have skills in color grading, visual effects, and narrative design.",
-    className: "font-normal text-[#E1E0CC]",
-  },
-];
-
-const BODY_TEXT =
-  "Over the last seven years, I have worked with Parallax, a Berlin-based production house that crafts cinema, series, and Noir Studio in Paris. Together, we have created work that has earned international acclaim at several major festivals.";
+import { motion } from "framer-motion";
+import { differentiators, trustStats } from "@/lib/siteData";
 
 export default function AboutSection() {
   return (
-    <section className="bg-black py-16 md:py-24 px-4 md:px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Inner card */}
-        <div className="bg-[#101010] rounded-2xl md:rounded-3xl px-6 py-10 md:px-12 md:py-16 lg:px-16 lg:py-20 text-center">
-          {/* Label */}
-          <p
-            className="text-[10px] sm:text-xs mb-6 md:mb-8 tracking-widest uppercase"
-            style={{ color: "#DEDBC8" }}
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <div className="container">
+        {/* Stats row */}
+        <div className="mb-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {trustStats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="rounded-2xl border border-slate-100 bg-slate-50 p-5 text-center shadow-sm"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+            >
+              <div
+                className="text-3xl font-extrabold tracking-tight"
+                style={{ color: "#79abdc" }}
+              >
+                {stat.value}
+              </div>
+              <p className="mt-1.5 text-xs leading-5 text-slate-500">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Main about content */}
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          {/* Left: heading + body */}
+          <motion.div
+            className="space-y-5"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            Visual arts
-          </p>
+            <span className="eyebrow">Why AG Best Cleaning</span>
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Providing the best services{" "}
+              <span style={{ color: "#79abdc" }}>for homes</span>{" "}
+              &{" "}
+              <span style={{ color: "#5dab3b" }}>businesses</span>
+            </h2>
+            <p className="text-base leading-8 text-slate-600">
+              AG Best Cleaning Services was built on a simple idea: every client deserves a clean space they can be proud of, delivered by a team that genuinely cares. Aninha and her crew bring over 6 years of hands-on experience to every job — whether it's a weekly home clean or a full commercial contract.
+            </p>
+            <p className="text-base leading-8 text-slate-600">
+              We're not a faceless franchise. We're a local team that knows our clients by name, adapts to their schedules, and takes pride in the results we deliver. That's why our clients keep coming back — and keep referring us to their friends.
+            </p>
+          </motion.div>
 
-          {/* Main heading */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-w-3xl mx-auto leading-[0.95] sm:leading-[0.9] mb-8 md:mb-12">
-            <WordsPullUpMultiStyle
-              segments={ABOUT_SEGMENTS}
-              containerClassName="text-center"
-            />
-          </h2>
-
-          {/* Body paragraph with scroll-linked character opacity */}
-          <div className="max-w-2xl mx-auto">
-            <AnimatedText
-              text={BODY_TEXT}
-              className="text-[#DEDBC8] text-xs sm:text-sm md:text-base leading-relaxed"
-            />
+          {/* Right: differentiator cards */}
+          <div className="space-y-4">
+            {differentiators.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  className="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50 p-5 shadow-sm"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                >
+                  <div
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white shadow-md"
+                    style={{ backgroundColor: i % 2 === 0 ? "#79abdc" : "#5dab3b" }}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900">{item.title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">{item.description}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </div>

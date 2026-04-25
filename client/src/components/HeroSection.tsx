@@ -1,146 +1,161 @@
-/*
- * HeroSection — Full viewport height cinematic hero
- * Design: Analog Warmth / Darkroom Aesthetic
- *
- * Structure:
- * - p-4 md:p-6 outer padding (inset effect)
- * - Inner container: rounded-2xl md:rounded-[2rem] overflow-hidden
- * - Background video with noise overlay + gradient
- * - Absolutely positioned navbar (black pill)
- * - Bottom-aligned content: 12-col grid (8 heading + 4 text/button)
- */
-
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import WordsPullUp from "./WordsPullUp";
-
-const HERO_VIDEO_URL =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
-
-const NAV_ITEMS = [
-  "Our story",
-  "Collective",
-  "Workshops",
-  "Programs",
-  "Inquiries",
-];
+import { ArrowRight, Phone, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
+import { brand, primaryCTA, summaryHighlights } from "@/lib/siteData";
 
 const CUSTOM_EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function HeroSection() {
   return (
-    <section className="h-screen p-4 md:p-6 bg-black">
-      {/* Inner container with rounded corners and overflow hidden */}
-      <div className="relative w-full h-full rounded-2xl md:rounded-[2rem] overflow-hidden">
-        {/* Background video */}
-        <video
-          src={HERO_VIDEO_URL}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-28">
+      {/* Decorative background blobs */}
+      <div
+        className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-20 blur-3xl"
+        style={{ backgroundColor: "#79abdc" }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute bottom-0 -left-16 h-72 w-72 rounded-full opacity-15 blur-3xl"
+        style={{ backgroundColor: "#5dab3b" }}
+        aria-hidden="true"
+      />
 
-        {/* Noise overlay */}
-        <div
-          className="noise-overlay opacity-[0.7] mix-blend-overlay pointer-events-none"
-          aria-hidden="true"
-        />
+      <div className="container relative">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          {/* Left: Copy & CTA */}
+          <div className="max-w-xl space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: CUSTOM_EASE }}
+            >
+              <span className="eyebrow">Welcome to AG Best Cleaning</span>
+            </motion.div>
 
-        {/* Gradient overlay */}
-        <div
-          className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 pointer-events-none"
-          aria-hidden="true"
-        />
+            <motion.h1
+              className="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: CUSTOM_EASE }}
+            >
+              Quality Cleaning{" "}
+              <span style={{ color: "#79abdc" }}>for Homes</span>{" "}
+              &{" "}
+              <span style={{ color: "#5dab3b" }}>Businesses</span>
+            </motion.h1>
 
-        {/* Navbar — black pill hanging from top center */}
-        <nav className="absolute top-0 left-1/2 -translate-x-1/2 z-20">
-          <div className="bg-black rounded-b-2xl md:rounded-b-3xl px-4 py-2 md:px-8">
-            <ul className="flex items-center gap-3 sm:gap-6 md:gap-12 lg:gap-14">
-              {NAV_ITEMS.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-[10px] sm:text-xs md:text-sm transition-colors duration-200"
-                    style={{ color: "rgba(225, 224, 204, 0.8)" }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color =
-                        "#E1E0CC";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.color =
-                        "rgba(225, 224, 204, 0.8)";
-                    }}
+            <motion.p
+              className="text-lg leading-8 text-slate-600"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: CUSTOM_EASE }}
+            >
+              Serving Abington and Greater Boston for over 6 years. Aninha and her team deliver dependable, detail-oriented cleaning — tailored to your schedule and your space.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col gap-3 sm:flex-row sm:items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: CUSTOM_EASE }}
+            >
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full px-7 text-white shadow-lg shadow-green-200/50"
+                style={{ backgroundColor: "#5dab3b" }}
+              >
+                <Link href={primaryCTA.href}>
+                  {primaryCTA.label}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="rounded-full border-slate-200 bg-white px-7 text-slate-700 hover:border-[#79abdc] hover:text-[#79abdc]"
+              >
+                <a href={brand.phoneHref}>
+                  <Phone className="mr-2 h-4 w-4" />
+                  {brand.phoneDisplay}
+                </a>
+              </Button>
+            </motion.div>
+
+            {/* Trust badges */}
+            <motion.div
+              className="flex flex-wrap gap-3 pt-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.45, ease: CUSTOM_EASE }}
+            >
+              {summaryHighlights.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm"
                   >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+                    <Icon className="h-3.5 w-3.5" style={{ color: "#5dab3b" }} />
+                    {item.label}
+                  </div>
+                );
+              })}
+            </motion.div>
           </div>
-        </nav>
 
-        {/* Hero content — bottom aligned */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 p-4 md:p-8 lg:p-10">
-          <div className="grid grid-cols-12 items-end gap-4">
-            {/* Left: Giant heading */}
-            <div className="col-span-12 lg:col-span-8">
-              <h1
-                className="font-medium leading-[0.85] tracking-[-0.07em] text-[26vw] sm:text-[24vw] md:text-[22vw] lg:text-[20vw] xl:text-[19vw] 2xl:text-[20vw]"
-                style={{ color: "#E1E0CC" }}
-              >
-                <WordsPullUp
-                  text="Prisma"
-                  showAsterisk={true}
-                  staggerDelay={0.08}
-                />
-              </h1>
+          {/* Right: Hero image card */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: CUSTOM_EASE }}
+          >
+            <div className="relative overflow-hidden rounded-[2rem] shadow-2xl shadow-slate-200/80">
+              <img
+                src={brand.heroImage}
+                alt="AG Best Cleaning Services — professional cleaning team"
+                className="h-[420px] w-full object-cover sm:h-[480px]"
+              />
+              {/* Overlay card */}
+              <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/60 bg-white/90 p-4 backdrop-blur-md shadow-lg">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "#5dab3b" }}>
+                      Free estimate
+                    </p>
+                    <p className="mt-0.5 text-sm font-bold text-slate-900">
+                      Get a quote in 30 seconds
+                    </p>
+                  </div>
+                  <Button
+                    asChild
+                    size="sm"
+                    className="rounded-full text-white shadow-md"
+                    style={{ backgroundColor: "#79abdc" }}
+                  >
+                    <Link href="/contact">Start now</Link>
+                  </Button>
+                </div>
+                <div className="mt-3 flex items-center gap-4 border-t border-slate-100 pt-3">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                    <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "#5dab3b" }} />
+                    No commitment
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                    <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "#5dab3b" }} />
+                    Mon–Sat available
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                    <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "#5dab3b" }} />
+                    6+ years trusted
+                  </div>
+                </div>
+              </div>
             </div>
-
-            {/* Right: Description + CTA */}
-            <div className="col-span-12 lg:col-span-4 flex flex-col gap-4 pb-2 lg:pb-4">
-              {/* Description */}
-              <motion.p
-                className="text-xs sm:text-sm md:text-base"
-                style={{ color: "rgba(222, 219, 200, 0.7)", lineHeight: 1.2 }}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.5,
-                  ease: CUSTOM_EASE,
-                }}
-              >
-                Prisma is a worldwide network of visual artists, filmmakers and
-                storytellers bound not by place, status or labels but by passion
-                and hunger to unlock potential through our unique perspectives.
-              </motion.p>
-
-              {/* CTA Button */}
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.7,
-                  ease: CUSTOM_EASE,
-                }}
-              >
-                <button
-                  className="group inline-flex items-center gap-2 hover:gap-3 transition-all duration-300 bg-[#DEDBC8] rounded-full pl-5 pr-1 py-1 font-medium text-sm sm:text-base text-black"
-                >
-                  <span>Join the lab</span>
-                  <span className="bg-black rounded-full w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 flex-shrink-0">
-                    <ArrowRight
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      style={{ color: "#DEDBC8" }}
-                    />
-                  </span>
-                </button>
-              </motion.div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
