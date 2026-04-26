@@ -10,7 +10,7 @@
  * - Transitions: transition-colors throughout
  *
  * Sections:
- * 1. Hero (video background, nav, headline, CTA)
+ * 1. Hero (static image background, nav, headline, CTA)
  * 2. Logo Bar (tools & partners)
  * 3. Services (Website Design + Automated Lead System)
  * 4. How It Works (3 steps)
@@ -26,6 +26,32 @@ import { Menu, X, Globe, Zap, ArrowRight } from "lucide-react";
 function scrollTo(id: string) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+
+// ─── CTA Button ──────────────────────────────────────────────────────────────
+interface CtaButtonProps {
+  label: string;
+  target: string;
+  fullWidthMobile?: boolean;
+  className?: string;
+}
+
+function CtaButton({ label, target, fullWidthMobile = false, className = "" }: CtaButtonProps) {
+  return (
+    <button
+      onClick={() => scrollTo(target)}
+      className={`${fullWidthMobile ? "w-full md:w-auto" : ""} px-6 py-3 rounded-full text-white font-medium transition-colors text-base ${className}`}
+      style={{ backgroundColor: "#202A36" }}
+      onMouseEnter={(e) =>
+        ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "#1a2229")
+      }
+      onMouseLeave={(e) =>
+        ((e.currentTarget as HTMLButtonElement).style.backgroundColor = "#202A36")
+      }
+    >
+      {label}
+    </button>
+  );
 }
 
 // ─── Navigation ──────────────────────────────────────────────────────────────
@@ -44,7 +70,7 @@ function Nav() {
     <nav className="absolute top-0 left-0 right-0 z-30">
       <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
         {/* Brand */}
-        <span className="text-2xl font-semibold text-gray-900 select-none">
+        <span className="text-2xl font-semibold text-white select-none">
           Voss &amp; Co
         </span>
 
@@ -54,7 +80,7 @@ function Nav() {
             <button
               key={l.target}
               onClick={() => scrollTo(l.target)}
-              className="text-gray-900 hover:text-gray-700 transition-colors text-sm font-medium"
+              className="text-white/80 hover:text-white transition-colors text-sm font-medium"
             >
               {l.label}
             </button>
@@ -64,15 +90,15 @@ function Nav() {
         {/* Desktop CTA */}
         <button
           onClick={() => scrollTo("form")}
-          className="hidden md:inline-flex items-center px-4 py-2 rounded-full text-white text-sm font-medium transition-colors"
-          style={{ backgroundColor: "#202A36" }}
+          className="hidden md:inline-flex items-center px-4 py-2 rounded-full text-white text-sm font-medium transition-colors border border-white/30 backdrop-blur-sm"
+          style={{ backgroundColor: "rgba(32,42,54,0.7)" }}
           onMouseEnter={(e) =>
             ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-              "#1a2229")
+              "rgba(26,34,41,0.9)")
           }
           onMouseLeave={(e) =>
             ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-              "#202A36")
+              "rgba(32,42,54,0.7)")
           }
         >
           Get a Free Preview
@@ -80,7 +106,7 @@ function Nav() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden text-gray-900"
+          className="md:hidden text-white"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -90,7 +116,7 @@ function Nav() {
 
       {/* Mobile dropdown */}
       {open && (
-        <div className="md:hidden mx-4 rounded-2xl shadow-lg bg-white/95 backdrop-blur-sm px-6 py-4 flex flex-col gap-3">
+        <div className="md:hidden mx-4 rounded-2xl shadow-lg bg-gray-900/95 backdrop-blur-sm px-6 py-4 flex flex-col gap-3">
           {links.map((l) => (
             <button
               key={l.target}
@@ -98,7 +124,7 @@ function Nav() {
                 scrollTo(l.target);
                 setOpen(false);
               }}
-              className="text-gray-900 hover:text-gray-700 transition-colors text-sm font-medium text-left py-1"
+              className="text-white/80 hover:text-white transition-colors text-sm font-medium text-left py-1"
             >
               {l.label}
             </button>
@@ -124,20 +150,19 @@ function Hero() {
   return (
     <section
       id="home"
-      className="relative h-screen overflow-hidden bg-gray-50"
+      className="relative h-screen overflow-hidden"
+      style={{ backgroundColor: "#0d1117" }}
     >
-      {/* Video background */}
-      <video
+      {/* Static image background — placeholder: replace with real hero image */}
+      <img
+        src="/hero-bg.jpg"
+        alt="Voss & Co hero background"
         className="absolute inset-0 w-full h-full object-cover"
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_091828_e240eb17-6edc-4129-ad9d-98678e3fd238.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
+        loading="eager"
       />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-white/40" />
+      {/* Dark overlay for text legibility */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(13,17,23,0.55) 0%, rgba(13,17,23,0.45) 60%, rgba(13,17,23,0.75) 100%)" }} />
 
       {/* Nav */}
       <Nav />
@@ -148,38 +173,24 @@ function Hero() {
           <div className="text-center px-4">
             {/* Headline */}
             <h1 className="leading-none tracking-tighter">
-              <span className="block text-6xl md:text-7xl lg:text-8xl font-normal text-gray-500">
+              <span className="block text-6xl md:text-7xl lg:text-8xl font-normal text-white/60">
                 Sales. Tech.
               </span>
               <span
-                className="block text-6xl md:text-7xl lg:text-8xl font-normal"
-                style={{ color: "#202A36", marginTop: "-12px" }}
+                className="block text-6xl md:text-7xl lg:text-8xl font-normal text-white"
+                style={{ marginTop: "-12px" }}
               >
                 New Clients.
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+            <p className="mt-6 text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-8">
               We build the system that brings clients in.
             </p>
 
             {/* CTA */}
-            <button
-              onClick={() => scrollTo("form")}
-              className="px-6 py-3 rounded-full text-white font-medium transition-colors text-base"
-              style={{ backgroundColor: "#202A36" }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-                  "#1a2229")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-                  "#202A36")
-              }
-            >
-              Get a Free Website Preview
-            </button>
+            <CtaButton label="Get a Free Website Preview" target="form" />
           </div>
         </div>
       </div>
@@ -205,7 +216,7 @@ function LogoBar() {
         <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest mb-8">
           Powered by tools we trust
         </p>
-        {/* Logo row — scrollable on mobile */}
+        {/* Logo row — wraps on mobile */}
         <div className="flex flex-wrap justify-center gap-8 md:gap-12">
           {logos.map((name) => (
             <div
@@ -306,7 +317,7 @@ function HowItWorks() {
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 relative">
           {steps.map((step, idx) => (
-            <div key={step.number} className="flex flex-col md:flex-row items-start">
+            <div key={step.number} className="flex flex-row md:flex-col">
               {/* Step card */}
               <div className="flex-1 flex flex-col gap-4 px-0 md:px-6 pb-10 md:pb-0">
                 <span
@@ -340,21 +351,7 @@ function HowItWorks() {
 
         {/* CTA */}
         <div className="mt-14 flex justify-center">
-          <button
-            onClick={() => scrollTo("form")}
-            className="px-6 py-3 rounded-full text-white font-medium transition-colors text-base"
-            style={{ backgroundColor: "#202A36" }}
-            onMouseEnter={(e) =>
-              ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-                "#1a2229")
-            }
-            onMouseLeave={(e) =>
-              ((e.currentTarget as HTMLButtonElement).style.backgroundColor =
-                "#202A36")
-            }
-          >
-            Get a Free Website Preview
-          </button>
+          <CtaButton label="Get a Free Website Preview" target="form" />
         </div>
       </div>
     </section>
@@ -607,7 +604,7 @@ function Footer() {
           </a>
         </div>
         <p className="text-gray-500 text-xs">
-          © 2025 Voss &amp; Co. All rights reserved.
+          © 2026 Voss &amp; Co. All rights reserved.
         </p>
       </div>
     </footer>
